@@ -1,0 +1,1 @@
+This is an app to view character stats at a glance on chrome.
