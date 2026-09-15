@@ -67,10 +67,22 @@
     return Array.from(found, ([card, id]) => ({ card, id }));
   }
 
-  function statChip(label, value, extraClass) {
+  function statChip(label, value, options) {
+    const { extraClass, title } = options || {};
     const chip = el('div', `ddbh-chip${extraClass ? ` ${extraClass}` : ''}`);
     chip.append(el('div', 'ddbh-chip__label', label), el('div', 'ddbh-chip__value', value));
+    if (title) chip.title = title;
     return chip;
+  }
+
+  /** Highest save DC across casting classes; the rest go in the tooltip. */
+  function spellSaveChip(sheet) {
+    if (sheet.spellcasting.length === 0) return null;
+    const [primary] = sheet.spellcasting;
+    const title = sheet.spellcasting
+      .map((c) => `${c.className}: DC ${c.dc}, attack ${signed(c.attack)} (${c.ability})`)
+      .join(' \u00b7 ');
+    return statChip('Spell Save DC', primary.dc, { extraClass: 'ddbh-chip--spell', title });
   }
 
   function hitPointChip(hp) {
@@ -189,12 +201,15 @@
     const bar = el('div', 'ddbh-bar');
     bar.append(
       hitPointChip(sheet.hp),
-      statChip('AC', sheet.ac.value),
-      statChip('Passive Perc.', sheet.passives.perception),
+      statChip('AC', sheet.ac.value, { title: sheet.ac.armor.join(', ') || 'Unarmored' }),
+      statChip('Passive Perception', sheet.passives.perception),
+      statChip('Passive Insight', sheet.passives.insight),
       statChip('Initiative', signed(sheet.initiative)),
       statChip('Speed', `${sheet.speed.walk} ft`),
-      statChip('Prof.', signed(sheet.proficiencyBonus))
+      statChip('Prof. Bonus', signed(sheet.proficiencyBonus))
     );
+    const spellChip = spellSaveChip(sheet);
+    if (spellChip) bar.append(spellChip);
     panel.append(bar);
 
     const details = el('div', 'ddbh-details');

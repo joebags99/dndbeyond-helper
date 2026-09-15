@@ -15,15 +15,21 @@ const payload = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures', 'war
 
 const IDS = ['132553946', '132557509', '131883097'];
 
-function characterPayload(id, name) {
+function characterPayload(id, name, { nonCaster = false } = {}) {
   const copy = JSON.parse(JSON.stringify(payload));
   copy.data.id = Number(id);
   copy.data.name = name;
+  if (nonCaster) {
+    copy.data.classes = [
+      { level: 6, definition: { name: 'Fighter', spellCastingAbilityId: null }, subclassDefinition: null }
+    ];
+    copy.data.pactMagic = [];
+  }
   return copy;
 }
 
 /** Boots a jsdom page with the content script loaded and the chrome API stubbed. */
-async function bootPage({ failFor = [] } = {}) {
+async function bootPage({ failFor = [], nonCasters = [] } = {}) {
   const dom = new JSDOM(html, { url: 'https://www.dndbeyond.com/campaigns/5889945', runScripts: 'outside-only' });
   const { window } = dom;
   const requests = [];
@@ -38,7 +44,12 @@ async function bootPage({ failFor = [] } = {}) {
           results: message.ids.map((id) =>
             failFor.includes(id)
               ? { id, ok: false, error: 'Not readable.' }
-              : { id, ok: true, payload: characterPayload(id, `Character ${id}`), fetchedAt: Date.now() }
+              : {
+                  id,
+                  ok: true,
+                  payload: characterPayload(id, `Character ${id}`, { nonCaster: nonCasters.includes(id) }),
+                  fetchedAt: Date.now()
+                }
           )
         };
       }
@@ -100,11 +111,42 @@ test('renders the headline numbers a DM scans for', async () => {
   const text = panel.textContent;
   assert.match(text, /38 \/ 45/); // current / max hit points
   assert.match(text, /\+5 temp/);
-  assert.ok(text.includes('Passive Perc.'));
-  assert.ok(text.includes('14')); // passive perception
+  assert.ok(text.includes('Passive Perception'));
 
   const chips = Array.from(panel.querySelectorAll('.ddbh-chip'), (c) => c.querySelector('.ddbh-chip__label').textContent);
-  assert.deepEqual(chips, ['Hit Points', 'AC', 'Passive Perc.', 'Initiative', 'Speed', 'Prof.']);
+  assert.deepEqual(chips, [
+    'Hit Points',
+    'AC',
+    'Passive Perception',
+    'Passive Insight',
+    'Initiative',
+    'Speed',
+    'Prof. Bonus',
+    'Spell Save DC'
+  ]);
+
+  const value = (label) =>
+    Array.from(panel.querySelectorAll('.ddbh-chip')).find(
+      (c) => c.querySelector('.ddbh-chip__label').textContent === label
+    ).querySelector('.ddbh-chip__value').textContent;
+  assert.equal(value('Passive Perception'), '14');
+  assert.equal(value('Passive Insight'), '11');
+  assert.equal(value('Spell Save DC'), '15');
+});
+
+test('the spell save chip tooltips the casting class, and is dropped for non-casters', async () => {
+  const { document } = await bootPage({ nonCasters: ['132557509'] });
+
+  const caster = document.querySelector('.ddbh-panel[data-character-id="132553946"] .ddbh-chip--spell');
+  assert.match(caster.title, /Warlock: DC 15, attack \+7 \(CHA\)/);
+  assert.equal(caster.querySelector('.ddbh-chip__value').textContent, '15');
+
+  const fighter = document.querySelector('.ddbh-panel[data-character-id="132557509"]');
+  assert.equal(fighter.querySelector('.ddbh-chip--spell'), null);
+  const labels = Array.from(fighter.querySelectorAll('.ddbh-chip__label'), (l) => l.textContent);
+  assert.ok(labels.includes('Passive Perception'));
+  assert.ok(labels.includes('Passive Insight'));
+  assert.ok(!labels.includes('Spell Save DC'));
 });
 
 test('lists only proficient skills by default, with languages and senses', async () => {

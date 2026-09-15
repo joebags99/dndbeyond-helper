@@ -7,7 +7,10 @@ under every card so you can read the whole party at a glance.
 Always visible on each card:
 
 - **Hit points** — current / max, with a colour-coded bar and any temp HP
-- **AC**, **passive Perception**, **initiative**, **walking speed**, **proficiency bonus**
+- **AC**, **passive Perception**, **passive Insight**, **initiative**, **walking speed**,
+  **proficiency bonus**
+- **Spell save DC** for anyone with a casting class (hover for the attack bonus,
+  casting ability, and every class when multiclassed)
 - Flags for active **conditions**, **inspiration**, and characters at 0 HP
 
 Behind a per-card *Show details* toggle (open by default):

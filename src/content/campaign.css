@@ -90,15 +90,20 @@
 
 .ddbh-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(58px, 1fr));
   gap: 6px;
+  align-items: stretch;
 }
 
+/* Column layout + the auto margin below keep every value on the same baseline,
+   however many lines a label needs. */
 .ddbh-chip {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--ddbh-line);
   border-radius: 4px;
   background: #fff;
-  padding: 4px 6px;
+  padding: 4px 3px;
   text-align: center;
   min-width: 0;
 }
@@ -107,18 +112,24 @@
   grid-column: span 2;
 }
 
+.ddbh-chip--spell {
+  border-color: #b9a7c9;
+  background: #f7f3fa;
+}
+
 .ddbh-chip__label {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
+  line-height: 1.25;
   text-transform: uppercase;
   color: var(--ddbh-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
 }
 
 .ddbh-chip__value {
+  margin-top: auto;
+  padding-top: 2px;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
@@ -369,6 +380,7 @@
     color: #ecedee;
   }
 
+  .ddbh-chip--spell { background: #2a2433; border-color: #574a68; }
   .ddbh-save.is-proficient { background: #26332a; border-color: #4a6b4f; }
   .ddbh-hpbar { background: #333c42; }
   .ddbh-skill { border-bottom-color: #2b343a; }
