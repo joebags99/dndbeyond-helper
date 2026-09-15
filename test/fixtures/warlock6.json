@@ -1,0 +1,114 @@
+{
+  "id": 132553946,
+  "success": true,
+  "message": "",
+  "data": {
+    "id": 132553946,
+    "name": "Cailynn Falkrest",
+    "readonlyUrl": "https://www.dndbeyond.com/profile/Kaylamarieex/characters/132553946",
+    "decorations": { "avatarUrl": "https://example.invalid/avatar.jpeg" },
+    "inspiration": true,
+    "baseHitPoints": 33,
+    "bonusHitPoints": null,
+    "overrideHitPoints": null,
+    "removedHitPoints": 7,
+    "temporaryHitPoints": 5,
+    "currentXp": 14000,
+    "stats": [
+      { "id": 1, "value": 8 }, { "id": 2, "value": 14 }, { "id": 3, "value": 14 },
+      { "id": 4, "value": 10 }, { "id": 5, "value": 12 }, { "id": 6, "value": 17 }
+    ],
+    "bonusStats": [
+      { "id": 1, "value": null }, { "id": 2, "value": null }, { "id": 3, "value": null },
+      { "id": 4, "value": null }, { "id": 5, "value": null }, { "id": 6, "value": null }
+    ],
+    "overrideStats": [
+      { "id": 1, "value": null }, { "id": 2, "value": null }, { "id": 3, "value": null },
+      { "id": 4, "value": null }, { "id": 5, "value": null }, { "id": 6, "value": null }
+    ],
+    "race": {
+      "fullName": "High Elf",
+      "baseRaceName": "Elf",
+      "weightSpeeds": { "normal": { "walk": 30, "fly": 0, "burrow": 0, "swim": 0, "climb": 0 } }
+    },
+    "background": { "definition": { "name": "Noble" } },
+    "classes": [
+      {
+        "level": 6,
+        "definition": { "name": "Warlock", "spellCastingAbilityId": 6, "canCastSpells": true },
+        "subclassDefinition": { "name": "The Great Old One", "spellCastingAbilityId": null }
+      }
+    ],
+    "conditions": [{ "id": 11, "level": null }],
+    "deathSaves": { "failCount": 0, "successCount": 0, "isStabilized": false },
+    "customSenses": [],
+    "spellSlots": [],
+    "pactMagic": [{ "level": 3, "used": 1, "available": 2 }],
+    "inventory": [
+      {
+        "equipped": true,
+        "isAttuned": false,
+        "definition": {
+          "name": "Studded Leather",
+          "filterType": "Armor",
+          "armorClass": 12,
+          "armorTypeId": 1,
+          "grantedModifiers": []
+        }
+      },
+      {
+        "equipped": true,
+        "isAttuned": true,
+        "definition": {
+          "name": "Cloak of Protection",
+          "filterType": "Wondrous item",
+          "grantedModifiers": [
+            { "id": "cloak-ac", "type": "bonus", "subType": "armor-class", "value": 1, "requiresAttunement": true },
+            { "id": "cloak-save", "type": "bonus", "subType": "saving-throws", "value": 1, "requiresAttunement": true }
+          ]
+        }
+      },
+      {
+        "equipped": false,
+        "isAttuned": false,
+        "definition": {
+          "name": "Shield",
+          "filterType": "Armor",
+          "armorClass": 2,
+          "armorTypeId": 4,
+          "grantedModifiers": []
+        }
+      }
+    ],
+    "modifiers": {
+      "race": [
+        { "id": "r1", "type": "bonus", "subType": "dexterity-score", "value": 2 },
+        { "id": "r2", "type": "proficiency", "subType": "perception", "friendlySubtypeName": "Perception" },
+        { "id": "r3", "type": "language", "subType": "common", "friendlySubtypeName": "Common" },
+        { "id": "r4", "type": "language", "subType": "elvish", "friendlySubtypeName": "Elvish" },
+        { "id": "r5", "type": "set", "subType": "darkvision", "value": 60 }
+      ],
+      "class": [
+        { "id": "c1", "type": "proficiency", "subType": "deception", "friendlySubtypeName": "Deception" },
+        { "id": "c2", "type": "proficiency", "subType": "arcana", "friendlySubtypeName": "Arcana" },
+        { "id": "c3", "type": "proficiency", "subType": "wisdom-saving-throws", "friendlySubtypeName": "Wisdom Saving Throws" },
+        { "id": "c4", "type": "proficiency", "subType": "charisma-saving-throws", "friendlySubtypeName": "Charisma Saving Throws" },
+        { "id": "c5", "type": "proficiency", "subType": "light-armor", "friendlySubtypeName": "Light Armor" }
+      ],
+      "background": [
+        { "id": "b1", "type": "proficiency", "subType": "history", "friendlySubtypeName": "History" },
+        { "id": "b2", "type": "language", "subType": "draconic", "friendlySubtypeName": "Draconic" }
+      ],
+      "item": [
+        { "id": "cloak-ac", "type": "bonus", "subType": "armor-class", "value": 1, "requiresAttunement": true },
+        { "id": "cloak-save", "type": "bonus", "subType": "saving-throws", "value": 1, "requiresAttunement": true }
+      ],
+      "feat": [
+        { "id": "f1", "type": "bonus", "subType": "charisma-score", "value": 2 }
+      ],
+      "condition": [
+        { "id": "x1", "type": "bonus", "subType": "armor-class", "value": 99 }
+      ]
+    }
+  }
+}
