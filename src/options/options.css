@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light dark;
+  --ink: #1c1c1c;
+  --muted: #6b6b6b;
+  --line: #d7d3cb;
+  --surface: #faf8f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ecedee;
+    --muted: #9aa3a8;
+    --line: #38424a;
+    --surface: #12181c;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+h1 { font-size: 22px; margin: 0 0 4px; }
+h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 8px; }
+
+.lede { margin: 0 0 24px; color: var(--muted); }
+
+.group {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+label.inline { display: flex; align-items: center; gap: 6px; }
+
+input[type="number"] {
+  width: 84px;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.hint { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+
+.status { min-height: 20px; color: var(--muted); font-size: 12px; }

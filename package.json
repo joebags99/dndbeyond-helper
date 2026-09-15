@@ -1,0 +1,13 @@
+{
+  "name": "dndbeyond-campaign-stat-blocks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension that adds at-a-glance character stat blocks to D&D Beyond campaign pages.",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "icons": "node tools/generate-icons.js"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  }
+}

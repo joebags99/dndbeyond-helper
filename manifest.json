@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "D&D Beyond Campaign Stat Blocks",
+  "version": "1.0.0",
+  "description": "Adds an at-a-glance stat block (HP, AC, passive scores, skills, saves, languages) to every character card on a D&D Beyond campaign page.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.dndbeyond.com/*",
+    "https://character-service.dndbeyond.com/*",
+    "https://auth-service.dndbeyond.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.dndbeyond.com/campaigns/*",
+        "https://www.dndbeyond.com/my-campaigns*"
+      ],
+      "js": ["src/lib/ddb-stats.js", "src/content/campaign.js"],
+      "css": ["src/content/campaign.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "D&D Beyond Campaign Stat Blocks",
+    "default_icon": {
+      "16": "src/icons/icon16.png",
+      "32": "src/icons/icon32.png",
+      "48": "src/icons/icon48.png",
+      "128": "src/icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "src/icons/icon16.png",
+    "32": "src/icons/icon32.png",
+    "48": "src/icons/icon48.png",
+    "128": "src/icons/icon128.png"
+  }
+}

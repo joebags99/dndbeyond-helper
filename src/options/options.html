@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>D&amp;D Beyond Campaign Stat Blocks — Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>Campaign Stat Blocks</h1>
+      <p class="lede">
+        Choose what shows up under each character card on a D&amp;D Beyond campaign page.
+      </p>
+
+      <section class="group">
+        <h2>Sections</h2>
+        <label><input type="checkbox" data-setting="showAbilities" /> Ability scores</label>
+        <label><input type="checkbox" data-setting="showSaves" /> Saving throws</label>
+        <label><input type="checkbox" data-setting="showSkills" /> Skills</label>
+        <label><input type="checkbox" data-setting="showSenses" /> Passive scores &amp; senses</label>
+        <label><input type="checkbox" data-setting="showLanguages" /> Languages</label>
+        <label><input type="checkbox" data-setting="showOtherProficiencies" /> Armor, weapon &amp; tool proficiencies</label>
+        <label><input type="checkbox" data-setting="showSpellcasting" /> Spell save DC &amp; slots</label>
+      </section>
+
+      <section class="group">
+        <h2>Skills</h2>
+        <label><input type="radio" name="skillMode" data-setting="skillMode" value="proficient" /> Only skills the character is proficient in</label>
+        <label><input type="radio" name="skillMode" data-setting="skillMode" value="all" /> All eighteen skills</label>
+      </section>
+
+      <section class="group">
+        <h2>Behaviour</h2>
+        <label><input type="checkbox" data-setting="startExpanded" /> Open details automatically</label>
+        <label class="inline">
+          Re-fetch sheets after
+          <input type="number" min="0" max="3600" step="30" data-setting="cacheTtlSeconds" />
+          seconds
+        </label>
+        <p class="hint">
+          0 fetches fresh data on every page load. The Refresh button on the campaign page always
+          bypasses the cache.
+        </p>
+      </section>
+
+      <p class="status" id="status" role="status"></p>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
